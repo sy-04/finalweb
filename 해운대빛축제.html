@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>부산 해운대 빛축제</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: white;
+            height: 6000px;
+            margin: 0;
+            /* Add margin to body to prevent default margin */
+        }
+
+        div {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .container {
+            background-color: #abcdef;
+            height: 6000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 150px;
+        }
+
+        .frame {
+            background-color: #ffffff;
+            height: 6000px;
+            width: 2000px;
+            padding: 20px;
+        }
+
+        nav#menubar {
+            width: 100%;
+            overflow: hidden;
+            height: 80px;
+            background-color: #1b2035;
+            margin: 0px 0;
+        }
+
+        #menubar>a {
+            display: flex;
+            align-items: center;
+            float: left;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 80px;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        #menubar > a > img {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px; 
+        }
+
+        #menubar > a, #menubar>ul {
+            height: 80px;
+            line-height: 80px;
+        }
+
+        #menubar>ul {
+            float: right;
+        }
+
+        #menubar>ul li {
+            float: left;
+            padding: 0 30px;
+            line-height: 80px;
+        }
+
+        #menubar>ul li:hover{
+            background-color: rgb(23, 148, 148);
+        }
+
+        .description-box {
+            width: 600px;
+            border-top: 5px solid black;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .description-box2 {
+            width: 600px;
+            border-top: 5px solid black;
+            font-size: 24px;
+            margin: 0 auto;
+        }
+
+        /* 이미지 슬라이드 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .slidebox {
+            max-width: 1000px;
+            max-height: 500px;
+            margin: 0 auto;
+        }
+
+        .slidebox .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .slidebox .slidelist .slideitem {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .slidebox .slidelist .slideitem>a {
+            display: block;
+            width: auto;
+            position: relative;
+        }
+
+        .slidebox .slidelist .slideitem>a img {
+            max-width: 100%;
+        }
+
+        .slidebox .slidelist .slideitem>a label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slidebox .slidelist .slideitem>a label.prev {
+            left: 20px;
+            background: #333 url('image/left-arrow.png') center center / 50% no-repeat;
+        }
+
+        .slidebox .slidelist .slideitem>a label.next {
+            right: 20px;
+            background: #333 url('image/right-arrow.png') center center / 50% no-repeat;
+        }
+        .slidebox_food {
+            max-width: 1000px;
+            max-height: 500px;
+            margin: 0 auto;
+        }
+
+        .slidebox_food .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .slidebox_food .slidelist .slideitem {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .slidebox_food .slidelist .slideitem>a {
+            display: block;
+            width: auto;
+            position: relative;
+        }
+
+        .slidebox_food .slidelist .slideitem>a img {
+            max-width: 100%;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label.prev {
+            left: 20px;
+            background: #333 url('image/left-arrow.png') center center / 50% no-repeat;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label.next {
+            right: 20px;
+            background: #333 url('image/right-arrow.png') center center / 50% no-repeat;
+        }
+
+
+
+        [name="slide"] {
+            display: none;
+        }
+
+        #slide01:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01 15s infinite;
+        }
+
+        #slide02:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02 15s infinite;
+        }
+
+        #slide03:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03 15s infinite;
+        }
+
+        [name="slide_food"] {
+            display: none;
+        }
+
+        #slide01_food:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01_food 15s infinite;
+        }
+
+        #slide02_food:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02_food 15s infinite;
+        }
+
+        #slide03_food:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03_food 15s infinite;
+        }
+
+        [name="slide_accommodation"] {
+            display: none;
+        }
+
+        #slide01_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01_food 15s infinite;
+        }
+
+        #slide02_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02_food 15s infinite;
+        }
+
+        #slide03_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03_food 15s infinite;
+        }
+
+        @keyframes slide01 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide01_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide01_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+       /* 이미지 슬라이드 Style */
+       .root_daum_roughmap {
+        margin: auto !important;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="menubar">
+        <a href="search.html">
+            <img src="https://cdn-icons-png.flaticon.com/128/7269/7269386.png">
+        </a>
+        <ul>
+            <li><a href="spring.html" style="text-decoration-line: none; color: #fff;">봄</a></li>
+            <li><a href="summer.html" style="text-decoration-line: none; color: #fff">여름</a></li>
+            <li><a href="autumn.html" style="text-decoration-line: none; color: #fff">가을</a></li>
+            <li><a href="winter.html" style="text-decoration-line: none; color: #fff">겨울</a></li>
+            <li><a href="http://203.234.62.112:9090/" style="text-decoration-line: none; color: #fff">게시판</a></li>
+        </ul>
+        </nav>
+    </header>
+    <h1 style="padding: 20px; text-align: center; margin-top: 0px;">해운대 빛축제</h1>
+
+    <hr>
+    <div class="container">
+        <div class="frame">
+            <div style="margin-left: 150px; margin-top: 150px; display: inline-block; vertical-align: top;">
+                <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/b3b7a23c-c7f6-45db-930a-b139e4d8cd9f_5.jpg" alt="" width="700" height="500">
+            </div>
+            <div class="description-box" style="display: inline-block; vertical-align: top; margin-top: 350px;">
+                <p style="font-family: 'Gowun Dodum', sans-serif;">
+                <h3>부산 겨울 빛축제</h3><br>
+                해운대의 대표적인 겨울축제로 자리매김하고 있는 <br>'제10회 해운대 빛축제'가 2023년 12월 2일부터 <br>2024년 1월 31일까지 개최된다.<br>
+                아름다운 빛 조형물 포토존들과 다양한 프로그램을 즐기면서 해운대에서 잊지 못할 추억을 만들 수 있다.
+            </div>
+            <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                <p><h2>축제 내용 및 풍경</h2></p>
+            </div>
+            <div>
+                <div class="slidebox" style="margin-top: 10px; ">
+                    <input type="radio" name="slide" id="slide01" checked>
+                    <input type="radio" name="slide" id="slide02">
+                    <input type="radio" name="slide" id="slide03">
+                    <ul class="slidelist">
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide03" class="prev"></label>
+                                <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/b3b7a23c-c7f6-45db-930a-b139e4d8cd9f_4.jpg" 
+                                width="1000px" height="500px">
+                                <label for="slide02" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide01" class="prev"></label>
+                                <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/b3b7a23c-c7f6-45db-930a-b139e4d8cd9f_6.jpg"
+                                width="1000px" height="500px">
+                                <label for="slide03" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide02" class="prev"></label>
+                                <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/b3b7a23c-c7f6-45db-930a-b139e4d8cd9f_7.jpg" 
+                                width="1000px" height="500px">
+                                <label for="slide01" class="next"></label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                    <p style="font-family: 'Gowun Dodum', sans-serif;">
+                    <h3>축제 내용</h3><br>
+                    1. 전시: 빛 시설물 전시, 미디어존, 빛 조형물 포토존<br>
+                    2. 시민참여프로그램: 소원엽서 운영, 사진인화 서비스<br>
+                    3. 공연: 캐럴송 경연대회, 크리스마스 공연 등</p>
+                </div>
+
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                    <p><h2>주변 맛집</h2></p>
+                </div>
+                <div>
+                    <div class="slidebox" style="margin-top: 10px; ">
+                        <input type="radio" name="slide_accommodation" id="slide01_accommodation" checked>
+                        <input type="radio" name="slide_accommodation" id="slide02_accommodation">
+                        <input type="radio" name="slide_accommodation" id="slide03_accommodation">
+                        <ul class="slidelist">
+                            <li class="slideitem">
+                                <a>
+                                    <label for="slide03_accommodation" class="prev"></label>
+                                    <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=d9f11099-fe59-470a-8d5b-6a9b56a3eb10"
+                                    width="1000px" height="500px">
+                                    <label for="slide02_accommodation" class="next"></label>
+                                </a>
+                            </li>
+                            <li class="slideitem">
+                                <a>
+                                    <label for="slide01_accommodation" class="prev"></label>
+                                    <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=ff2059b5-7a6b-47fb-b6fa-5c08a8b122d1"
+                                    width="1000px" height="500px">
+                                    <label for="slide03_accommodation" class="next"></label>
+                                </a>
+                            </li>
+                            <li class="slideitem">
+                                <a>
+                                    <label for="slide02_accommodation" class="prev"></label>
+                                    <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=9d3b9fcf-8598-4f35-afbf-df7695da26cd" 
+                                    width="1000px" height="500px">
+                                    <label for="slide01_accommodation" class="next"></label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                        <p style="font-family: 'Gowun Dodum', sans-serif;">
+                        <h3>주변 맛집</h3><br>
+                        <a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a6238561-6c9a-4105-a4f8-e1d4bd1073b1&big_category=A05&mid_category=A0502&big_area=6" style="text-decoration-line: none; color: black;">해목<br></a>
+                        <a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=eca44f5c-3332-4f9c-9f09-fe17368403b5&big_category=A05&mid_category=A0502&big_area=6"style="text-decoration-line: none; color: black;">그랜드애플</a><br>
+                        <a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=12251fce-8e26-4121-9af1-9d8a7ebf2ab4&big_category=A05&mid_category=A0502&big_area=6"style="text-decoration-line: none; color: black;">금수복국</a><br>
+                    </div>
+                
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                    <p><h2>-지도-</h2></p>
+                </div>
+            </script>
+                <div style="margin-top: 20px;">
+                    <div class="root_daum_roughmap"  id="map" style="width:1000px;height:500px;"></div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=92c88c873130d9d0eb42fec393d5410e"></script>
+                    <script>
+                        var container = document.getElementById('map');
+                        var options = {
+                            center: new kakao.maps.LatLng(35.15319511354625, 129.11897394685383),
+                            level: 3
+                        };  
+                        var map = new kakao.maps.Map(container, options);
+                                                    // 마커가 표시될 위치입니다 
+                            var markerPosition  = new kakao.maps.LatLng(35.15319511354625, 129.11897394685383); 
+
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                                position: markerPosition
+                            });
+
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map);
+                
+                      
+                    </script>
+            </div>
+        </div>
+
+        <script>
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach((box) => {
+                    if (box.isIntersecting) {
+                        box.target.style.opacity = 1;
+                    } else {
+                        box.target.style.opacity = 0;
+                    }
+                });
+            });
+
+            let divs = document.querySelectorAll('div');
+            divs.forEach((div) => {
+                observer.observe(div);
+            });
+        </script>
+ 
+
+</body>
+
+</html>

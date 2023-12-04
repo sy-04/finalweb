@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>마켓피어9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        header {
+            margin:0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        body {
+            background-color: white;
+            height: 6000px;
+            margin: 0;
+            /* Add margin to body to prevent default margin */
+        }
+
+        div {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .container {
+            background-color: #abcdef;
+            height: 6000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 150px;
+        }
+
+        .frame {
+            background-color: #ffffff;
+            height: 6000px;
+            width: 2000px;
+            padding: 20px;
+        }
+
+        nav#menubar {
+            width: 100%;
+            overflow: hidden;
+            height: 80px;
+            background-color: #1b2035;
+            margin: 0px 0;
+        }
+
+        #menubar>a {
+            display: flex;
+            align-items: center;
+            float: left;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 80px;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        #menubar > a > img {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px; 
+        }
+
+        #menubar > a, #menubar>ul {
+            height: 80px;
+            line-height: 80px;
+        }
+
+        #menubar>ul {
+            float: right;
+        }
+
+        #menubar>ul li {
+            float: left;
+            padding: 0 30px;
+            line-height: 80px;
+        }
+
+        #menubar>ul li:hover{
+            background-color: rgb(23, 148, 148);
+        }
+
+        .description-box {
+            width: 600px;
+            border-top: 5px solid black;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .description-box2 {
+            width: 600px;
+            border-top: 5px solid black;
+            font-size: 24px;
+            margin: 0 auto;
+        }
+
+        /* 이미지 슬라이드 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .slidebox {
+            max-width: 1000px;
+            max-height: 500px;
+            margin: 0 auto;
+        }
+
+        .slidebox .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .slidebox .slidelist .slideitem {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .slidebox .slidelist .slideitem>a {
+            display: block;
+            width: auto;
+            position: relative;
+        }
+
+        .slidebox .slidelist .slideitem>a img {
+            max-width: 100%;
+        }
+
+        .slidebox .slidelist .slideitem>a label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slidebox .slidelist .slideitem>a label.prev {
+            left: 20px;
+            background: #333 url('image/left-arrow.png') center center / 50% no-repeat;
+        }
+
+        .slidebox .slidelist .slideitem>a label.next {
+            right: 20px;
+            background: #333 url('image/right-arrow.png') center center / 50% no-repeat;
+        }
+        .slidebox_food {
+            max-width: 1000px;
+            max-height: 500px;
+            margin: 0 auto;
+        }
+
+        .slidebox_food .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .slidebox_food .slidelist .slideitem {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .slidebox_food .slidelist .slideitem>a {
+            display: block;
+            width: auto;
+            position: relative;
+        }
+
+        .slidebox_food .slidelist .slideitem>a img {
+            max-width: 100%;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label.prev {
+            left: 20px;
+            background: #333 url('image/left-arrow.png') center center / 50% no-repeat;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label.next {
+            right: 20px;
+            background: #333 url('image/right-arrow.png') center center / 50% no-repeat;
+        }
+
+
+
+        [name="slide"] {
+            display: none;
+        }
+
+        #slide01:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01 15s infinite;
+        }
+
+        #slide02:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02 15s infinite;
+        }
+
+        #slide03:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03 15s infinite;
+        }
+
+        [name="slide_food"] {
+            display: none;
+        }
+
+        #slide01_food:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01_food 15s infinite;
+        }
+
+        #slide02_food:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02_food 15s infinite;
+        }
+
+        #slide03_food:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03_food 15s infinite;
+        }
+
+        [name="slide_accommodation"] {
+            display: none;
+        }
+
+        #slide01_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01_food 15s infinite;
+        }
+
+        #slide02_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02_food 15s infinite;
+        }
+
+        #slide03_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03_food 15s infinite;
+        }
+
+        @keyframes slide01 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide01_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide01_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+       /* 이미지 슬라이드 Style */
+       .root_daum_roughmap {
+        margin: auto !important;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="menubar">
+        <a href="search.html">
+            <img src="https://cdn-icons-png.flaticon.com/128/7269/7269386.png">
+        </a>
+        <ul>
+            <li><a href="spring.html" style="text-decoration-line: none; color: #fff;">봄</a></li>
+            <li><a href="summer.html" style="text-decoration-line: none; color: #fff">여름</a></li>
+            <li><a href="autumn.html" style="text-decoration-line: none; color: #fff">가을</a></li>
+            <li><a href="winter.html" style="text-decoration-line: none; color: #fff">겨울</a></li>
+            <li><a href="http://203.234.62.112:9090/" style="text-decoration-line: none; color: #fff">게시판</a></li>
+        </ul>
+        </nav>
+    </header>
+    <h1 style="padding: 20px; text-align: center; margin-top: 0px;">포항 마켓피어9 축제</h1>
+
+    <hr>
+    <div class="container">
+        <div class="frame">
+            <div style="margin-left: 150px; margin-top: 150px; display: inline-block; vertical-align: top;">
+                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEyMDFfMjY0%2FMDAxNzAxNDI3OTQ5ODkz.D3eMiYYVKysjmN2DIoSwFQLIlHFsgyoIGrtoR3O0uwQg.1zyUYOtz7v0YFvEpKeAjj-S67-YwrKs6F6Ym3Mjn8Ycg.JPEG.rush98y%2F1701427932517.jpg&type=sc960_832" alt="" width="700" height="500">
+            </div>
+            <div class="description-box" style="display: inline-block; vertical-align: top; margin-top: 350px;">
+                <p style="font-family: 'Gowun Dodum', sans-serif;">
+                <h3>양평 겨울 대표 축제</h3><br>
+                마켓피어9은 구룡포의 선착에서 열리는 <br>국내 최초의 부두 야시장이자 해양미식축제이다.<br>
+                해녀조합과 함께하는 해녀 마켓, 푸드트럭 만선 마켓, <br>수공예 작가들이 함께하는 예술 마켓으로 구성된다. 
+                직접 구매한 특상물을 구워먹을 수 있는 바비큐존, 체험, 이벤트, 공연 프로그램 까지 즐길거리가 풍부하게 준비되어있다.
+            </div>
+            <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                <p><h2>축제 내용 및 풍경</h2></p>
+            </div>
+            <div>
+                <div class="slidebox" style="margin-top: 10px; ">
+                    <input type="radio" name="slide" id="slide01" checked>
+                    <input type="radio" name="slide" id="slide02">
+                    <input type="radio" name="slide" id="slide03">
+                    <ul class="slidelist">
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide03" class="prev"></label>
+                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzExMzBfMjY1%2FMDAxNzAxMzU0MDg2MzE1.2-sZHeLk9RPJ72oFXpzMuwUEtbUqVr_iMz3a2BqYd8sg.4RwGDRkk8pNQsv5Z_UvdU4KAL7ZkaeAz593tUIrpBM0g.PNG.kyk100413%2F%25BD%25BA%25C5%25A9%25B8%25B0%25BC%25A6_2023-11-30_%25BF%25C0%25C8%25C4_11.18.20.png&type=sc960_832" 
+                                width="1000px" height="500px">
+                                <label for="slide02" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide01" class="prev"></label>
+                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzExMzBfNzUg%2FMDAxNzAxMzExMTYyNjE5.rjgA36ng4p55lWiZbLAccSqXaXP7s76-L-Zdw5NmQvkg.dKn78iBfibufdfX0zAPTkd8EadXaX4UbntimuR4hoBkg.PNG.gjgift%2F2.png&type=sc960_832"
+                                width="1000px" height="500px">
+                                <label for="slide03" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide02" class="prev"></label>
+                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEyMDJfMTc3%2FMDAxNzAxNTA5NTYxODIx.iRD_hl3CCb2WFn4g0V7ADMWCVXaVyXDgHPHk7AWt_hMg.Bze1ccAUHcfbSpFQAF93lwPfuzz-69hA6nny_qeIrssg.JPEG.wkyon567%2F20231202%25A3%25DF181918.jpg&type=sc960_832" 
+                                width="1000px" height="500px">
+                                <label for="slide01" class="next"></label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                    <p style="font-family: 'Gowun Dodum', sans-serif;">
+                    <h3>축제 내용</h3><br>
+                    - 푸드트럭 15팀<br>
+                    - 수공예 셀러<br>
+                    - 체험 프로그램<br>
+                    - 공연<br>
+                    </p>
+                </div>
+
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                    <p><h2>포항 카페</h2></p>
+                </div>
+                <div>
+                    <div class="slidebox" style="margin-top: 10px; ">
+                        <input type="radio" name="slide_accommodation" id="slide01_accommodation" checked>
+                        <input type="radio" name="slide_accommodation" id="slide02_accommodation">
+                        <input type="radio" name="slide_accommodation" id="slide03_accommodation">
+                        <ul class="slidelist">
+                            <li class="slideitem">
+                                <a>
+                                    <label for="slide03_accommodation" class="prev"></label>
+                                    <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=6d4b865c-b66e-411e-8d5b-a0094481fb7b"
+                                    width="1000px" height="500px">
+                                    <label for="slide02_accommodation" class="next"></label>
+                                </a>
+                            </li>
+                            <li class="slideitem">
+                                <a>
+                                    <label for="slide01_accommodation" class="prev"></label>
+                                    <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=da92c7ef-b812-4676-a0d8-6831862f5a90"
+                                    width="1000px" height="500px">
+                                    <label for="slide03_accommodation" class="next"></label>
+                                </a>
+                            </li>
+                            <li class="slideitem">
+                                <a>
+                                    <label for="slide02_accommodation" class="prev"></label>
+                                    <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=21aec702-2ade-41d5-9f43-922043cd2235" 
+                                    width="1000px" height="500px">
+                                    <label for="slide01_accommodation" class="next"></label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                        <p style="font-family: 'Gowun Dodum', sans-serif;">
+                        <h3>유명한 카페</h3><br>
+                        <a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=0abadd80-a961-4c95-b62d-a32d1bb141e2&big_category=A05&mid_category=A0502&big_area=35" style="text-decoration-line: none; color: black;">카페포토피아<br></a>
+                        <a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=23b60885-649f-4d87-8b8f-65feccdf74f7&big_category=A05&mid_category=A0502&big_area=35"style="text-decoration-line: none; color: black;">러블랑</a><br>
+                        <a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2b475780-8c31-4ded-b6ca-4acfb6ac8abe&big_category=A05&mid_category=A0502&big_area=35"style="text-decoration-line: none; color: black;">어레인지먼트</a><br>
+                    </div>
+                
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                    <p><h2>-지도-</h2></p>
+                </div>
+            </script>
+                <div style="margin-top: 20px;">
+                    <div class="root_daum_roughmap"  id="map" style="width:1000px;height:500px;"></div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=92c88c873130d9d0eb42fec393d5410e"></script>
+                    <script>
+                        var container = document.getElementById('map');
+                        var options = {
+                            center: new kakao.maps.LatLng(35.15319511354625, 129.11897394685383),
+                            level: 3
+                        };  
+                        var map = new kakao.maps.Map(container, options);
+                                                    // 마커가 표시될 위치입니다 
+                            var markerPosition  = new kakao.maps.LatLng(35.15319511354625, 129.11897394685383); 
+
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                                position: markerPosition
+                            });
+
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map);
+                
+                      
+                    </script>
+            </div>
+        </div>
+
+        <script>
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach((box) => {
+                    if (box.isIntersecting) {
+                        box.target.style.opacity = 1;
+                    } else {
+                        box.target.style.opacity = 0;
+                    }
+                });
+            });
+
+            let divs = document.querySelectorAll('div');
+            divs.forEach((div) => {
+                observer.observe(div);
+            });
+
+            window.addEventListener("scroll", function() {
+            var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll > lastScrollTop) {
+                // 스크롤 다운
+                var header = document.querySelector('nav#menubar');
+                header.style.backgroundColor = 'rgba(27, 32, 53, 0.5)';
+            } else {
+                // 스크롤 업
+                var header = document.querySelector('nav#menubar');
+                header.style.backgroundColor = 'rgba(27, 32, 53, 1)';
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }, false);
+        </script>
+</body>
+</html>

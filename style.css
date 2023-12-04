@@ -1,0 +1,173 @@
+/* 전체 요소에 대한 초기화 */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+
+.container {
+    padding-top: 50px;
+    background-color: #f2f2f2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 999;
+}
+
+.menu > li {
+    width: 20%;
+    float: left;
+    text-align: center;
+    line-height: 50px;
+    background-color: dodgerblue;
+    transition-duration: 0.5s;
+}
+
+.menu > li:hover {
+    background-color: aqua;
+}
+
+.menu li {
+    flex: 1;
+
+    text-align: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #000;
+}
+
+.submenu {
+    height: 0;
+    overflow: hidden;
+}
+
+.menu > li:hover > .submenu {
+    height: 100px;
+    transition-duration: 1s;
+}
+
+.menu > li:hover .submenu > li:hover {
+    background-color: rgb(17, 99, 99);
+}
+
+.search-container {
+    position:relative;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 999;
+}
+
+.search-container input[type="text"],
+.search-container button {
+    padding: 10px;
+    font-size: 16px;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* 부모 요소를 화면 가로 중앙에 위치시키기 위해 변경 */
+    max-width: 1200px; /* 최대 너비 지정 */
+    height: 800px;
+    margin: 0 auto; /* 가운데 정렬을 위한 margin 추가 */
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: slider 7.5s infinite linear;
+}
+
+.slide:nth-child(1) {
+    background-image: url("https://images.unsplash.com/photo-1595356700395-6f14b5c1f33f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80");
+    animation-delay: 0;
+    opacity: 1;
+}
+
+.slide:nth-child(2) {
+    background-image: url("https://images.unsplash.com/photo-1591019052241-e4d95a5dc3fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80");
+    animation-delay: -2.5s;
+}
+
+.slide:nth-child(3) {
+    background-image: image("https://images.unsplash.com/photo-1543373014-cfe4f4bc1cdf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80");
+    animation-delay: -5s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes slider {
+    0% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+  
+    26% {
+      transform: translateX(0);
+    }
+    33% {
+        opacity: 1;
+      transform: translateX(-100%);
+      animation-timing-function: step-end;
+    }
+    93% {
+      transform: translateX(100%);
+    }
+  
+    100% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+  }
+
+  .seasons {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px; /* 이미지 간격을 위한 여백 설정 */
+    justify-content: space-between; /* 이미지를 왼쪽과 오른쪽으로 분산 배치 */
+    background-color: #f9f9f9;
+}
+
+.seasons > div {
+    width: calc(25% - 30px); /* 각 이미지의 너비 계산하여 4분할 */
+    margin-bottom: 20px; /* 이미지 간격을 위한 여백 설정 */
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.seasons > div img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}

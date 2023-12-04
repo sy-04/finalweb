@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>자유게시판</title>
+        <link rel="stylesheet" href="static/css/css.css" />
+    </head>
+    <body>
+        <div class="board_wrap">
+            <div class="board_title">
+                <strong>자유게시판</strong>
+                <p>여행에 관련된 글을 자유롭게 작성하세요.</p>
+            </div>
+            <div class="board_view_wrap">
+                <form action="./edit" method="POST" id="edit">
+                    <div class="board_view">
+                        <div class="title">{{title}}</div>
+                        <div class="info">
+                            <dl>
+                                <dt>번호</dt>
+                                <dd>{{num}}</dd>
+                            </dl>
+                            <dl>
+                                <dt>글쓴이</dt>
+                                <dd>{{name}}</dd>
+                            </dl>
+                            <dl>
+                                <dt>작성일</dt>
+                                <dd>{{date}}</dd>
+                            </dl>
+                            <dl>
+                                <dt>조회</dt>
+                                <dd>{{view}}</dd>
+                            </dl>
+                        </div>
+                        <div class="cont" value="{{content}}">{{content}}</div>
+                    </div>
+                    <input type="hidden" value="{{title}}" name="title" />
+                    <input type="hidden" value="{{name}}" name="name" />
+                    <input type="hidden" value="{{num}}" name="num" />
+                    <input type="hidden" value="{{content}}" name="content" />
+                    <input type="hidden" value="{{pwd}}" name="pwd" />
+                </form>
+                <div class="bt_wrap">
+                    <a href="/index" class="on">목록</a>
+                    <a onclick="send();">수정</a>
+                </div>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/view.js') }}"></script>
+    </body>
+</html>

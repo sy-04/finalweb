@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>여행지 리스트</title>
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            color: rgb(19, 36, 135);
+        }
+
+        #search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #search-input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        ul.horizontal-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* 가로 중앙 정렬 */
+        }
+
+        ul.horizontal-list li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        ul.horizontal-list li:hover {
+            transform: scale(1.05); /* 호버 시 약간 확대 효과 */
+        }
+
+        ul.horizontal-list li img {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        ul.horizontal-list a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        ul.horizontal-list a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        nav#menubar {
+            width: 100%;
+            overflow: hidden;
+            height: 80px;
+            background-color: #1b2035;
+            margin: 50px 0;
+        }
+
+        #menubar>a {
+            display: flex;
+            align-items: center;
+            float: left;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 80px;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        #menubar > a > img {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px; 
+        }
+
+        #menubar > a, #menubar>ul {
+            height: 80px;
+            line-height: 80px;
+        }
+
+        #menubar>ul {
+            float: right;
+        }
+
+        #menubar>ul li {
+            float: left;
+            padding: 0 30px;
+            line-height: 80px;
+        }
+
+        #menubar>ul li:hover{
+            background-color: rgb(23, 148, 148);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="menubar">
+        <a href="search.html">
+            <img src="https://cdn-icons-png.flaticon.com/128/7269/7269386.png">
+        </a>
+        <ul>
+            <li><a href="spring.html">봄</a></li>
+            <li><a href="summer.html">여름</a></li>
+            <li><a href="autumn.html">가을</a></li>
+            <li><a href="winter.html">겨울</a></li>
+            <li><a href="http://203.234.62.112:9090/">게시판</a></li>
+        </ul>
+        </nav>
+    </header>
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="여행지 검색">
+    </div>
+    <h3>봄 여행지 리스트</h3>
+    <ul id="travel-destinations" class="horizontal-list">
+        <!-- 여행지 목록이 여기에 동적으로 추가됩니다. -->
+    </ul>
+
+    <script>
+        const destinations = [
+            
+            {
+                name: "다대포 꿈의 낙조분수",
+                link: "https://www.saha.go.kr/tour/contents.do?mId=0609000000",
+                image: "https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=0760472e-68de-4186-a30c-5b739432e818"
+            },
+            {
+                name: "아침고요수목원",
+                link: "https://www.morningcalm.co.kr/html/main.php",
+                image: "https://www.morningcalm.co.kr/_ADM/data/goodsImages/goods_31641964442.png"
+            },
+            {
+                name: "전주 한옥마을",
+                link: "https://hanok.jeonju.go.kr/",
+                image: "https://hanok.jeonju.go.kr/uploads/editor/2019/12/989c1124997ba3e8a335fc43a294c17e.jpg"
+            },
+            {
+                name: "경복궁",
+                link: "https://www.royalpalace.go.kr/",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150831_251%2F1440997727845NDP0Y_JPEG%2F11571707_2.jpg"
+            },
+            {
+                name: "성산일출봉",
+                link: "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500349",
+                image: "https://api.cdn.visitjeju.net/photomng/imgpath/201810/17/4b1d0709-9a08-45ad-a42f-ee265f13b157.jpg"
+            },
+            {
+                name: "태안 네이처월드",
+                link: "https://www.ffestival.co.kr/main",
+                image: "https://www.ffestival.co.kr/img_up/shop_pds/kp575/bbs/sub2_5/add_img/2022/a11672301230.jpg"
+            },
+            {
+                name: "무주 덕유산 국립공원",
+                link: "https://www.knps.or.kr/front/portal/visit/visitCourseMain.do?parkId=120800&menuNo=7020089#",
+                image: "https://www.knps.or.kr/upload/contest/22/20231011020520547.JPG"
+            },
+            {
+                name: "비룡담저수지",
+                link: "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=897c9635-d479-4ef9-91c0-626683319c0d",
+                image: "https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=2c92a002-aedf-4765-a09c-33d69f50bcd6"
+            },
+            
+        ];
+
+        // 검색창 입력 내용이 변경될 때 동적 검색
+        document.getElementById("search-input").addEventListener("input", function() {
+            searchTravelDestinations();
+        });
+
+        function searchTravelDestinations() {
+            const searchInput = document.getElementById("search-input").value;
+            const destinationsList = document.getElementById("travel-destinations");
+            destinationsList.innerHTML = ""; // 이전 결과 지우기
+
+            for (const destination of destinations) {
+                if (destination.name.includes(searchInput)) {
+                    appendDestinationWithImage(destination, destinationsList);
+                }
+            }
+        }
+
+        function appendDestinationWithImage(destination, list) {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = destination.link;
+
+            const image = document.createElement("img");
+            image.src = destination.image;
+            image.alt = destination.name;
+
+            link.textContent = destination.name;
+
+            listItem.appendChild(image);
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // 여름 여행지 초기 리스트 표시
+            const destinationsList = document.getElementById("travel-destinations");
+            for (const destination of destinations) {
+                appendDestinationWithImage(destination, destinationsList);
+            }
+
+        });
+    </script>
+</body>
+</html>

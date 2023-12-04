@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행사이트</title>
+    <link rel="stylesheet" href="search.css">
+    <style>
+      header {
+        margin:0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        transition: background-color 0.3s ease;
+        z-index: 1000;
+      }
+
+      #searchInput {
+          width: 300px;
+          height: 40px;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          outline: none;
+      }
+
+      #searchInput::placeholder {
+          color: #999;
+      }
+
+      #searchInput:hover {
+          border-color: #666;
+      }
+
+      #searchInput:focus {
+          border-color: #007bff;
+      }
+
+      .search-container {
+            text-align: center;
+            margin-top: 200px;
+            margin-bottom: 200px;
+        }
+
+        #search-input {
+            width: 300px;
+            height: 40px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        #search-input::placeholder {
+            color: #999;
+        }
+
+        #search-input:hover {
+            border-color: #666;
+        }
+
+        #search-input:focus {
+            border-color: #007bff;
+        }
+
+        #search-btn {
+            width: 100px;
+            height: 40px;
+            font-size: 16px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+            outline: none;
+        }
+
+        #search-btn:hover {
+            background-color: #0056b3;
+        }
+
+  </style>
+    <script src="slide.js"></script>
+</head>
+<body>
+    <header>
+      <nav id="menubar">
+      <a href="search.html">
+          <img src="https://cdn-icons-png.flaticon.com/128/7269/7269386.png">
+      </a>
+      <ul>
+          <li><a href="spring.html" style="text-decoration-line: none; color: #fff">봄</a></li>
+          <li><a href="summer.html" style="text-decoration-line: none; color: #fff">여름</a></li>
+          <li><a href="autumn.html" style="text-decoration-line: none; color: #fff">가을</a></li>
+          <li><a href="winter.html" style="text-decoration-line: none; color: #fff">겨울</a></li>
+          <li><a href="http://203.234.62.112:9090/" style="text-decoration-line: none; color: #fff">게시판</a></li>
+      </ul>
+      </nav>
+  </header>
+
+  <div class="search-container">
+  <input type="text" id="search-input" value="" placeholder="여행지 검색">
+  <button id="search-btn" onclick="searchDestinations()">검색</button>
+  </div>
+  <div class="slidebox" style="margin-top: 10px; ">
+      <input type="radio" name="slide" id="slide01" checked>
+      <input type="radio" name="slide" id="slide02">
+      <input type="radio" name="slide" id="slide03">
+      <ul class="slidelist">
+          <li class="slideitem">
+              <a href="양평빙송어축제.html">
+                  <label for="slide03" class="prev"></label>
+                  <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/ee90ecd1-8a54-4858-ac6d-b95e7f8d113a_3.jpg" 
+                  width="1000px" height="500px">
+                  <label for="slide02" class="next"></label>
+              </a>
+          </li>
+          <li class="slideitem">
+              <a href="해운대빛축제.html">
+                  <label for="slide01" class="prev"></label>
+                  <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/b3b7a23c-c7f6-45db-930a-b139e4d8cd9f_3.jpg"
+                  width="1000px" height="500px">
+                  <label for="slide03" class="next"></label>
+              </a>
+          </li>
+          <li class="slideitem">
+              <a href="마켓피어9.html">
+                  <label for="slide02" class="prev"></label>
+                  <img src="https://cdn.visitkorea.or.kr/kfes/upload/contents/db/8a00df8f-71f6-42f5-a61a-fca8f2019383_2.jpg" 
+                  width="1000px" height="500px">
+                  <label for="slide01" class="next"></label>
+              </a>
+          </li>
+      </ul>
+  </div>
+  <div class="seasons works_container">
+      <div class="works_main spring">
+          <div>
+            <a href="spring.html">
+              <img src="image/봄이미지.jpg" alt="봄">
+              <p>봄 축제</p>
+            </a>
+          </div>
+      </div>
+      <div class="seasons works_container">
+        <div class="works_main summer">
+          <div>
+            <a href="summer.html">
+              <img src="image/여름이미지.jpg" alt="여름">
+              <p>여름 축제</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="seasons works_container">
+        <div class="works_main autumn">
+          <div>
+            <a href="autumn.html">
+              <img src="image/가을이미지.jpg" alt="가을">
+              <p>가을 축제</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="seasons works_container">
+          <div class="works_main winter">
+            <div>
+              <a href="winter.html">
+                <img src="image/겨울이미지.jpg" alt="겨울">
+                <p>겨울 축제</p>
+              </a>
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    function searchDestinations() {
+        const searchInput = document.getElementById("search-input").value;
+        const url = `list.html?search=${encodeURIComponent(searchInput)}`;
+        window.location.href = url;
+    }
+
+      document.getElementById("search-input").addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+              event.preventDefault();
+              searchDestinations();
+          }
+      });
+
+      var lastScrollTop = 0;
+
+      window.addEventListener("scroll", function() {
+      var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll > lastScrollTop) {
+          // 스크롤 다운
+          var header = document.querySelector('nav#menubar');
+          header.style.backgroundColor = 'rgba(27, 32, 53, 0.5)';
+      } else {
+          // 스크롤 업
+          var header = document.querySelector('nav#menubar');
+          header.style.backgroundColor = 'rgba(27, 32, 53, 1)';
+      }
+
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      }, false);
+  </script>
+</body>
+</html>

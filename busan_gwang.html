@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>여행지</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: white;
+            height: 6000px;
+            margin: 0;
+            /* Add margin to body to prevent default margin */
+        }
+
+        div {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .container {
+            background-color: #abcdef;
+            height: 6000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 150px;
+        }
+
+        .frame {
+            background-color: #ffffff;
+            height: 6000px;
+            width: 2000px;
+            padding: 20px;
+        }
+
+        nav#menubar {
+            width: 100%;
+            overflow: hidden;
+            height: 80px;
+            background-color: #1b2035;
+            margin: 0px 0;
+        }
+
+        #menubar>a {
+            display: flex;
+            align-items: center;
+            float: left;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 80px;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        #menubar > a > img {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px; 
+        }
+
+        #menubar > a, #menubar>ul {
+            height: 80px;
+            line-height: 80px;
+        }
+
+        #menubar>ul {
+            float: right;
+        }
+
+        #menubar>ul li {
+            float: left;
+            padding: 0 30px;
+            line-height: 80px;
+        }
+
+        #menubar>ul li:hover{
+            background-color: rgb(23, 148, 148);
+        }
+
+        .description-box {
+            width: 600px;
+            border-top: 5px solid black;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .description-box2 {
+            width: 600px;
+            border-top: 5px solid black;
+            font-size: 24px;
+            margin: 0 auto;
+        }
+
+        /* 이미지 슬라이드 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .slidebox {
+            max-width: 1000px;
+            max-height: 500px;
+            margin: 0 auto;
+        }
+
+        .slidebox .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .slidebox .slidelist .slideitem {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .slidebox .slidelist .slideitem>a {
+            display: block;
+            width: auto;
+            position: relative;
+        }
+
+        .slidebox .slidelist .slideitem>a img {
+            max-width: 100%;
+        }
+
+        .slidebox .slidelist .slideitem>a label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slidebox .slidelist .slideitem>a label.prev {
+            left: 20px;
+            background: #333 url('image/left-arrow.png') center center / 50% no-repeat;
+        }
+
+        .slidebox .slidelist .slideitem>a label.next {
+            right: 20px;
+            background: #333 url('image/right-arrow.png') center center / 50% no-repeat;
+        }
+        .slidebox_food {
+            max-width: 1000px;
+            max-height: 500px;
+            margin: 0 auto;
+        }
+
+        .slidebox_food .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .slidebox_food .slidelist .slideitem {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all 1s;
+        }
+
+        .slidebox_food .slidelist .slideitem>a {
+            display: block;
+            width: auto;
+            position: relative;
+        }
+
+        .slidebox_food .slidelist .slideitem>a img {
+            max-width: 100%;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label.prev {
+            left: 20px;
+            background: #333 url('image/left-arrow.png') center center / 50% no-repeat;
+        }
+
+        .slidebox_food .slidelist .slideitem>a label.next {
+            right: 20px;
+            background: #333 url('image/right-arrow.png') center center / 50% no-repeat;
+        }
+
+
+
+        [name="slide"] {
+            display: none;
+        }
+
+        #slide01:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01 15s infinite;
+        }
+
+        #slide02:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02 15s infinite;
+        }
+
+        #slide03:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03 15s infinite;
+        }
+
+        [name="slide_food"] {
+            display: none;
+        }
+
+        #slide01_food:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01_food 15s infinite;
+        }
+
+        #slide02_food:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02_food 15s infinite;
+        }
+
+        #slide03_food:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03_food 15s infinite;
+        }
+
+        [name="slide_accommodation"] {
+            display: none;
+        }
+
+        #slide01_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(0);
+            animation: slide01_food 15s infinite;
+        }
+
+        #slide02_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(-100%);
+            animation: slide02_food 15s infinite;
+        }
+
+        #slide03_accommodation:checked~.slidelist .slideitem {
+            transform: translateX(-200%);
+            animation: slide03_food 15s infinite;
+        }
+
+        @keyframes slide01 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03 {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide01_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03_food {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide01_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: -200%;
+            }
+
+            99% {
+                left: -200%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide02_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: -100%;
+            }
+
+            66% {
+                left: -100%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+
+        @keyframes slide03_accommodation {
+            0% {
+                left: 0%;
+            }
+
+            33% {
+                left: 0%;
+            }
+
+            34% {
+                left: 200%;
+            }
+
+            66% {
+                left: 200%;
+            }
+
+            67% {
+                left: 100%;
+            }
+
+            99% {
+                left: 100%;
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+       /* 이미지 슬라이드 Style */
+       .root_daum_roughmap {
+        margin: auto !important;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="menubar">
+        <a href="search.html">
+            <img src="https://cdn-icons-png.flaticon.com/128/7269/7269386.png">
+        </a>
+        <ul>
+            <li><a href="spring.html" style="text-decoration-line: none; color: #fff;">봄</a></li>
+            <li><a href="summer.html" style="text-decoration-line: none; color: #fff">여름</a></li>
+            <li><a href="autumn.html" style="text-decoration-line: none; color: #fff">가을</a></li>
+            <li><a href="winter.html" style="text-decoration-line: none; color: #fff">겨울</a></li>
+            <li><a href="http://203.234.62.112:9090/" style="text-decoration-line: none; color: #fff">게시판</a></li>
+        </ul>
+        </nav>
+    </header>
+    <h1 style="padding: 20px; text-align: center; margin-top: 0px;">부산 광안리 해수욕장</h1>
+
+    <hr>
+    <div class="container">
+        <div class="frame">
+            <div style="margin-left: 150px; margin-top: 150px; display: inline-block; vertical-align: top;">
+                <img src="image/광안리 바다.jpeg" alt="" width="700" height="500">
+            </div>
+            <div class="description-box" style="display: inline-block; vertical-align: top; margin-top: 350px;">
+                <p style="font-family: 'Gowun Dodum', sans-serif;">
+                <h3>우리나라의 대표 휴양지 광안리</h3><br>
+                주변에 호텔부터 게스트 하우스까지 다양한 숙소 <br>다양한 맛집
+                야경이 아름다운 광안대교</p>
+            </div>
+            <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                <p><h2>-광안리 해수욕장의 볼거리-</h2></p>
+            </div>
+            <div>
+                <div class="slidebox" style="margin-top: 10px; ">
+                    <input type="radio" name="slide" id="slide01" checked>
+                    <input type="radio" name="slide" id="slide02">
+                    <input type="radio" name="slide" id="slide03">
+                    <ul class="slidelist">
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide03" class="prev"></label>
+                                <img src="image/광안리.jpeg" 
+                                width="1000px" height="500px">
+                                <label for="slide02" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide01" class="prev"></label>
+                                <img src="image/광안리 드론.jpg"
+                                width="1000px" height="500px">
+                                <label for="slide03" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide02" class="prev"></label>
+                                <img src="image/광안리 불꽃축제.jpeg" 
+                                width="1000px" height="500px">
+                                <label for="slide01" class="next"></label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                    <p style="font-family: 'Gowun Dodum', sans-serif;">
+                    <h3>밤에 특히 아름다운 광안리</h3><br>
+                    바다와 광안대교의 LED로 야경이 매우 아름답다 <br>
+                    매주 토요일, 2회 10분씩 드론쇼를 진행하고 <br>
+                11월마다 국내 최대규모의 불꽃축제를 개최한다</p>
+                </div>
+
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                <p><h2>-부산 광안리의 먹거리-</h2></p>
+            </div>
+            <div>
+                <div class="slidebox" style="margin-top: 10px; ">
+                    <input type="radio" name="slide_food" id="slide01_food" checked>
+                    <input type="radio" name="slide_food" id="slide02_food">
+                    <input type="radio" name="slide_food" id="slide03_food">
+                    <ul class="slidelist">
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide03" class="prev"></label>
+                                <img src="image/광안리 카페.jpeg"
+                                width="1000px" height="500px">
+                                <label for="slide02" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide01" class="prev"></label>
+                                <img src="image/광안리 먹거리.jpeg"
+                                width="1000px" height="500px">
+                                <label for="slide03" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide02" class="prev"></label>
+                                <img src="image/광안리 먹거리2.jpeg" 
+                                width="1000px" height="500px">
+                                <label for="slide01" class="next"></label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                    <p style="font-family: 'Gowun Dodum', sans-serif;">
+                    <h3>광안리 해수욕장의 먹거리</h3><br>
+                    바다가 보이는 다양한 맛집, 카페</p>
+                </div>
+
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                <p><h2>-부산 광안리의 숙소-</h2></p>
+            </div>
+            <div>
+                <div class="slidebox" style="margin-top: 10px; ">
+                    <input type="radio" name="slide_accommodation" id="slide01_accommodation" checked>
+                    <input type="radio" name="slide_accommodation" id="slide02_accommodation">
+                    <input type="radio" name="slide_accommodation" id="slide03_accommodation">
+                    <ul class="slidelist">
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide03" class="prev"></label>
+                                <img src="image/광안리 호텔1.jpeg"
+                                width="1000px" height="500px">
+                                <label for="slide02" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide01" class="prev"></label>
+                                <img src="image/광안리 호텔2.jpeg"
+                                width="1000px" height="500px">
+                                <label for="slide03" class="next"></label>
+                            </a>
+                        </li>
+                        <li class="slideitem">
+                            <a>
+                                <label for="slide02" class="prev"></label>
+                                <img src="image/광안리 호텔3.jpeg" 
+                                width="1000px" height="500px">
+                                <label for="slide01" class="next"></label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description-box2" style="vertical-align: top; margin-top: 20px; text-align: center;">
+                    <p style="font-family: 'Gowun Dodum', sans-serif;">
+                    <h3>광안리 해수욕장의 숙소</h3><br>
+                    호텔부터 게스트 하우스까지 다양한 숙소 <br>
+                광안리 바다의 오션뷰가 특징</p>
+                </div>
+
+                <div style="text-align: center; font-size: 24px; margin-top: 500px;">
+                    <p><h2>-지도-</h2></p>
+                </div>
+            </script>
+                <div style="margin-top: 20px;">
+                    <div class="root_daum_roughmap"  id="map" style="width:1000px;height:500px;"></div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=92c88c873130d9d0eb42fec393d5410e"></script>
+                    <script>
+                        var container = document.getElementById('map');
+                        var options = {
+                            center: new kakao.maps.LatLng(35.15319511354625, 129.11897394685383),
+                            level: 3
+                        };  
+                        var map = new kakao.maps.Map(container, options);
+                                                    // 마커가 표시될 위치입니다 
+                            var markerPosition  = new kakao.maps.LatLng(35.15319511354625, 129.11897394685383); 
+
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                                position: markerPosition
+                            });
+
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map);
+                
+                      
+                    </script>
+
+                    
+
+
+            </div>
+        </div>
+
+        <script>
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach((box) => {
+                    if (box.isIntersecting) {
+                        box.target.style.opacity = 1;
+                    } else {
+                        box.target.style.opacity = 0;
+                    }
+                });
+            });
+
+            let divs = document.querySelectorAll('div');
+            divs.forEach((div) => {
+                observer.observe(div);
+            });
+        </script>
+ 
+
+</body>
+
+</html>
